@@ -39,7 +39,6 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/wishlist/{user}', [WishlistController::class, 'add'])->name('wishlist.add'); 
     Route::post('/wishlist/add/{userId}', [WishlistController::class, 'add'])->name('wishlist.add'); 
     Route::patch('/wishlist/remove/{wishlistId}', [WishlistController::class, 'removeNotification'])->name('wishlist.remove'); 
-    Route::post('/wishlist/accept/{wishlistId}', [WishlistController::class, 'acceptFriendRequest'])->name('wishlist.accept'); 
   
     // Avatar
     Route::get('/avatars', [AvatarController::class, 'index'])->name('avatars.index'); 

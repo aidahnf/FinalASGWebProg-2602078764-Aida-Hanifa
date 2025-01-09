@@ -68,33 +68,7 @@ public function removeNotification(Request $request, $wishlistId)
 }
 
     
-
-public function acceptFriendRequest($wishlistId)
-{
-    $wishlist = Wishlist::findOrFail($wishlistId);
-    $authUser = Auth::user();
-
-    if ($wishlist->wishlist_user_id == $authUser->id) {
-
-        Wishlist::create([
-            'user_id' => $authUser->id,
-            'wishlist_user_id' => $wishlist->user_id,
-        ]);
-
-        Wishlist::create([
-            'user_id' => $wishlist->user_id,
-            'wishlist_user_id' => $authUser->id,
-        ]);
-
-        $wishlist->delete();
-
-        return redirect()->route('notif')->with('message', 'Friend request accepted!');
-    }
-
-    return redirect()->route('notif')->with('error', 'Unauthorized action!');
-}
-
-    
+ 
 
     public function startChat($friendId)
     {
