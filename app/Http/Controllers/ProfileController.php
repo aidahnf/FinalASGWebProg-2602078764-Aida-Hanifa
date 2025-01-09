@@ -42,6 +42,7 @@ class ProfileController extends Controller
             'profile_photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
+
         if ($request->hasFile('profile_photo')) {
             $file = $request->file('profile_photo');
             $filename = time() . '.' . $file->getClientOriginalExtension();
@@ -62,6 +63,7 @@ class ProfileController extends Controller
             return redirect()->route('login')->with('error', 'You must be logged in to perform this action.');
         }
         
+    
         Log::info('Deleting from wishlist where user_id=' . $authUserId . ' and wishlist_user_id=' . $friendId);
     
         Wishlist::where('user_id', $authUserId)->where('wishlist_user_id', $friendId)->delete();
@@ -72,18 +74,21 @@ class ProfileController extends Controller
     
     public function updateAvatar(Request $request)
     {
-        
+    
         $request->validate([
-            'avatar_id' => 'required|exists:avatars,id', // Validasi ID avatar
+            'avatar_id' => 'required|exists:avatars,id', 
         ]);
     
         $user = Auth::user();
+  
         $user->avatar_id = $request->avatar_id;
-
+   
         if ($request->has('replace_photo') && $request->replace_photo) {
-            $user->profile_photo = null;
+            $user->profile_photo = null; 
         }
+    
         $user->save();
+    
         return redirect()->route('profile.show')->with('success', 'Avatar updated successfully!');
     }
     
