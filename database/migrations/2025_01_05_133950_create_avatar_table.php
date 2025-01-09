@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('avatars', function (Blueprint $table) {
             $table->id();
-            $table->string('image_url'); // URL gambar avatar
-            $table->unsignedInteger('price'); // Harga avatar dalam bentuk coin
+            $table->string('image_url'); 
+            $table->unsignedInteger('price'); 
             $table->timestamps();
         });
     }
