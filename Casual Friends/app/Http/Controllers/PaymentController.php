@@ -17,7 +17,7 @@ class PaymentController extends Controller
    
     public function store(Request $request)
     {
-        $registrationFee = session('registration_fee'); // kita ambil biaya registrasi dari session
+        $registrationFee = session('registration_fee'); 
 
         $request->validate([
             'paid_amount' => 'required|numeric',

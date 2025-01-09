@@ -45,7 +45,7 @@ class RegisterController extends Controller
             'password' => 'required|string|min:8|confirmed',
             'gender' => 'required|in:Male,Female',
             'hobbies' => ['required', 'string', 'min:3', function ($attribute, $value, $fail) {
-                $hobbies = explode(',', $value);  // Pisahkan hobbies berdasarkan koma
+                $hobbies = explode(',', $value);  
                 if (count($hobbies) < 3) {
                     $fail('The hobbies must have at least 3 items.');
                 }
@@ -63,7 +63,6 @@ class RegisterController extends Controller
                              ->withInput();
         }
     
-        // Simpan data user setelah validasi berhasil
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
@@ -77,15 +76,11 @@ class RegisterController extends Controller
             'registration_fee' => $request->registration_fee,
         ]);
     
-        // Simpan fee yang dibayarkan ke session
+
         Session::put('registration_fee', $request->registration_fee);
 
-        // Di dalam method register setelah User berhasil disimpan
-        Auth::login($user);  // Login otomatis pengguna
+        Auth::login($user);  // Login otomatis 
 
-
-    
-        // Redirect ke halaman pembayaran
         return redirect()->route('payment.index');
     }
     
